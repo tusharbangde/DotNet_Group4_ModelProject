@@ -1,0 +1,107 @@
+.container{
+  margin-top: 2rem;
+}
+
+.home{
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.label {
+  margin-top: 2rem;
+  height: 44px;
+  width: 445px;
+}
+
+.welcome{
+  padding-left: 4rem !important;
+  padding-right: 4rem;
+}
+
+.project-title{
+  margin-left: 0.5rem;
+}
+
+.home{
+  margin-left: 1rem;
+}
+
+.label .short-headline {
+  color: transparent;
+  font-family: "Playfair Display-SemiBold", Helvetica;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.64px;
+  line-height: 44px;
+  width: 445px;
+}
+
+.label .text-wrapper {
+  color: #032d23;
+}
+
+.label .span {
+  color: #aaa713;
+}
+
+.label-2 {
+  height: 70px;
+  width: 445px;
+  margin-top: 4rem;
+}
+
+.label-2-signup {
+  height: 70px;
+  width: 445px;
+}
+
+.label-2, .label-2-signup .join-the-hype {
+  color: #032d23;
+  font-family: "Playfair Display-Bold", Helvetica;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1.34px;
+  line-height: 70px;
+  width: 445px;
+}
+
+.login-form .radios{
+  font-size: medium;
+  font-weight: 500;
+}
+
+.login-form .row{
+  margin-top: 1rem;
+}
+
+.forgot-password{
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-submit{
+  color: white;
+  background-color: #032d23;
+}
+
+.get-started{
+  color: #aaa713;
+  font-weight: 500;
+}
+
+.get-started:hover{
+  color: blue
+}
+
+.footer{
+  margin-top: 5rem;
+}
+
+.footer-signup{
+  margin-top: 2.5rem;
+}
+
+.background-img{
+  width:42rem;
+  height: 39.5rem;
+}
