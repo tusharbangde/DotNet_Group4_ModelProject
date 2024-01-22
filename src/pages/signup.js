@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import home from "../resources/home 1.png";
 import bgd from "../resources/home-page-image.png";
 import "../styles/login.css";
@@ -6,6 +6,53 @@ import Container from 'react-bootstrap/Container';
 import { Col, Form, Image, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 export const Signup = () => {
+
+    const [userType, setUserType] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [mobile, setMobile] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const [errors, setErrors] = useState([]);
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const ers = [];
+        if(userType==="") {
+            ers.push("Please select a user Type (Teacher or Student).");
+        }
+        if(!isValidEmail(email)) {
+            ers.push("Please enter a valid email address.");
+        }
+        if(name==="") {
+            ers.push("Please enter your full name");
+        }
+        if(mobile.length !== 10) {
+            ers.push("Please enter a valid mobile number.");
+        }
+        if(password==="") {
+            ers.push("Please choose a password");
+        }
+        if(password!==confirmPassword) {
+            ers.push("Password and confirm password do not match.");
+        }
+        setErrors(ers);
+        if(ers.length===0) {
+            console.log(userType);
+            console.log(email);
+            console.log(name);
+            console.log(mobile);
+            console.log(password);
+            console.log(confirmPassword);
+        }
+    }
+
+    function isValidEmail(input) {
+        var validRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return input.match(validRegex)
+    }
+
     return (
       <div className="d-flex">
         <Container>
@@ -30,6 +77,8 @@ export const Signup = () => {
                                             type="radio" 
                                             id={`teacher`} 
                                             label={`TEACHER`} 
+                                            onChange={()=>setUserType("Teacher")}
+                                            checked={userType==="Teacher"}
                                         />
                                     </Col>
                                     <Col>
@@ -38,44 +87,74 @@ export const Signup = () => {
                                             type="radio" 
                                             id={`student`} 
                                             label={`STUDENT`} 
+                                            onChange={()=>setUserType("Student")}
+                                            checked={userType==="Student"}
                                         />
                                     </Col>
                                 </Row>
                                 <Row className="name-input">
                                     <Col>
-                                        <Form.Control type="text" placeholder="Full name" />
+                                        <Form.Control
+                                         type="text" 
+                                         placeholder="Full name" 
+                                         onChange={(e)=>setName(e.target.value)}
+                                         />
                                     </Col>
                                 </Row>
                                 <Row className="email-input">
                                     <Col>
-                                        <Form.Control type="email" placeholder="Email address" />
+                                        <Form.Control 
+                                        type="email" 
+                                        placeholder="Email address" 
+                                        onChange={(e)=>setEmail(e.target.value)}
+                                        />
                                     </Col>
                                 </Row>
                                 <Row className="mobile-input">
                                     <Col>
-                                        <Form.Control type="number" placeholder="Mobile Number" maxLength={10} minLength={10}/>
+                                        <Form.Control 
+                                        type="number" 
+                                        placeholder="Mobile Number"
+                                        onChange={(e)=>setMobile(e.target.value)}
+                                        />
                                     </Col>
                                 </Row>
                                 <Row className="password-input">
                                     <Col>
-                                        <Form.Control type="password" placeholder="Password" />
+                                        <Form.Control 
+                                        type="password" 
+                                        placeholder="Password" 
+                                        onChange={(e)=>setPassword(e.target.value)}
+                                        />
                                     </Col>
                                 </Row>
                                 <Row className="confirm-password-input">
                                     <Col>
-                                        <Form.Control type="password" placeholder="Confirm Password" />
+                                        <Form.Control 
+                                        type="password" 
+                                        placeholder="Confirm Password" 
+                                        onChange={(e)=>setConfirmPassword(e.target.value)}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="text-danger">
+                                    <Col>
+                                        {errors.map(e=><div key={e}>{e}</div>)}
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        <Form.Control className="btn btn-primary btn-submit" type="submit" />
+                                        <Form.Control 
+                                        onClick={onSubmit}
+                                        className="btn btn-primary btn-submit" 
+                                        type="submit" />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
                                         <span>Already have an account ?</span>
                                         <NavLink style={{textDecoration:"none"}} to="/login">
-                                            <span className="get-started">Login</span>
+                                            <span className="get-started"> Login</span>
                                         </NavLink>
                                     </Col>
                                 </Row>
