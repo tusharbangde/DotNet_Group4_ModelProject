@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import home from "../resources/home 1.png";
 import bgd from "../resources/home-page-image.png";
 import "../styles/login.css";
