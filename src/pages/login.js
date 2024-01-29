@@ -1,10 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import home from "../resources/home 1.png";
 import bgd from "../resources/home-page-image.png";
 import "../styles/login.css";
 import Container from 'react-bootstrap/Container';
 import { Col, Form, Image, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export const Login = () => {
 
     const [userType, setUserType] = useState("");
@@ -12,7 +14,7 @@ export const Login = () => {
     const [password, setPassword] = useState("");
 
     const [errors, setErrors] = useState([]);
-
+    const navigate = useNavigate();
     const onSubmit = (e) => {
         e.preventDefault();
         const ers = [];
@@ -30,6 +32,20 @@ export const Login = () => {
             console.log(userType);
             console.log(email);
             console.log(password);
+            const data = {
+                Email: email,
+                Password: password,
+                userType: userType,
+            };
+            const url = 'https://localhost:44319/login';
+            axios.post(url, data).then((result) => {
+                if (result.data === "Data Found" && userType ==="Teacher") {
+                    navigate("/teacher-dashboard");
+                }
+                else alert(result.data);
+            }).catch((error) => {
+                alert(error);
+            })
         }
     }
      

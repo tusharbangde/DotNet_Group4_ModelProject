@@ -5,6 +5,7 @@ import "../styles/login.css";
 import Container from 'react-bootstrap/Container';
 import { Col, Form, Image, Row } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 export const Signup = () => {
 
     const [userType, setUserType] = useState("");
@@ -45,6 +46,19 @@ export const Signup = () => {
             console.log(mobile);
             console.log(password);
             console.log(confirmPassword);
+            const data = {
+                Name: name,
+                userType: userType,
+                Password: password,
+                Email: email,
+                PhoneNumber: mobile
+            };
+            const url = 'https://localhost:44319/registration';
+            axios.post(url, data).then((result) => {
+                alert(result.data);
+            }).catch((error) => {
+                alert(error);
+            })
         }
     }
 
