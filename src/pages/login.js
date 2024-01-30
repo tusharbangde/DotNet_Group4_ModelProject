@@ -37,7 +37,7 @@ export const Login = () => {
                 Password: password,
                 userType: userType,
             };
-            const url = 'https://localhost:44319/login';
+            const url = 'https://localhost:44388/login';
             axios.post(url, data).then((result) => {
                 if (result.data === "Data Found" && userType ==="Teacher") {
                     navigate("/teacher-dashboard");

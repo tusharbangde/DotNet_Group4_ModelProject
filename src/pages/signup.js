@@ -53,7 +53,7 @@ export const Signup = () => {
                 Email: email,
                 PhoneNumber: mobile
             };
-            const url = 'https://localhost:44319/registration';
+            const url = 'https://localhost:44388/registration';
             axios.post(url, data).then((result) => {
                 alert(result.data);
             }).catch((error) => {
