@@ -7,6 +7,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { TAssignmentCard } from "./TAssignmentCard";
 
+import { NavLink } from "react-router-dom";
 export const TeacherDashboard = () => {
     return (
         <div className="d-flex">
@@ -23,9 +24,12 @@ export const TeacherDashboard = () => {
                 </InputGroup>
                 <h3 style={{marginTop:"1.5rem"}}>New Assignment</h3>
                 <div>
-                    <Card style={{marginTop:"1.5rem", width:"fit-content"}}>
-                        <FontAwesomeIcon style={{height:"5rem", width:"5rem", margin:"3rem"}} icon={faSquarePlus} />
-                    </Card>
+                    <NavLink style={{ textDecoration: "none" }} to="/new-assignment">
+                        <Card style={{ marginTop: "1.5rem", width: "fit-content" }}>
+                            <FontAwesomeIcon style={{ height: "5rem", width: "5rem", margin: "3rem" }} icon={faSquarePlus} />
+                        </Card>
+                    </NavLink>
+                    
                 </div>
                 <h3 style={{marginTop:"1.5rem"}}>All Assignments</h3>
                 <div style={{marginTop:"2rem"}}>
