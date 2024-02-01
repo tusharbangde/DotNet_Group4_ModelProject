@@ -19,28 +19,21 @@ const Sidebar = () => {
           </a>
         </CDBSidebarHeader>
 
-        <CDBSidebarContent className="sidebar-content">
-          <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Assignments</CDBSidebarMenuItem>
-            </NavLink>
-            {/* <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Add New Assignment</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
-            </NavLink>
+              <CDBSidebarContent className="sidebar-content" style={{ height: '82vh' }}>
+                  <CDBSidebarMenu>
+                      <NavLink exact to="/profile" activeClassName="activeClicked">
+                          <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
+                      </NavLink>
+                      <NavLink exact to="/" activeClassName="activeClicked">
+                          <CDBSidebarMenuItem icon="sticky-note">Assignments</CDBSidebarMenuItem>
+                      </NavLink>
+                      <NavLink exact to="/tables" activeClassName="activeClicked">
+                          <CDBSidebarMenuItem icon="sign-out-alt">Logout</CDBSidebarMenuItem>
+                      </NavLink>
+                  </CDBSidebarMenu>
+              </CDBSidebarContent>
 
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
-            </NavLink> */}
-          </CDBSidebarMenu>
-        </CDBSidebarContent>
-
-        <CDBSidebarFooter style={{ textAlign: 'center' }}>
+       {/* <CDBSidebarFooter style={{ textAlign: 'center' }}>
           <div
             style={{
               padding: '20px 5px',
@@ -48,7 +41,7 @@ const Sidebar = () => {
           >
             Sidebar Footer
           </div>
-        </CDBSidebarFooter>
+        </CDBSidebarFooter>*/}
       </CDBSidebar>
     </div>
   );
