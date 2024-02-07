@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\pages"
+    "\\src\\pages",
+    "\\src\\resources"
   ],
-  "SelectedNode": "\\src\\pages\\teacherDashboard.js",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import {
   CDBSidebar,
@@ -54,4 +55,55 @@ const Sidebar = () => {
   );
 };
 
+=======
+import React from 'react';
+import {
+  CDBSidebar,
+  CDBSidebarContent,
+  CDBSidebarFooter,
+  CDBSidebarHeader,
+  CDBSidebarMenu,
+  CDBSidebarMenuItem,
+} from 'cdbreact';
+import { NavLink } from 'react-router-dom';
+
+const Sidebar = () => {
+  return (
+    <div style={{ display: 'flex', overflow: 'scroll initial' }}>
+      <CDBSidebar toggled={true} textColor="#fff" backgroundColor="#333">
+        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+            Sidebar
+          </a>
+        </CDBSidebarHeader>
+
+              <CDBSidebarContent className="sidebar-content" style={{ height: '82vh' }}>
+                  <CDBSidebarMenu>
+                      <NavLink exact to="/profile" activeClassName="activeClicked">
+                          <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
+                      </NavLink>
+                      <NavLink exact to="/" activeClassName="activeClicked">
+                          <CDBSidebarMenuItem icon="sticky-note">Assignments</CDBSidebarMenuItem>
+                      </NavLink>
+                      <NavLink exact to="/tables" activeClassName="activeClicked">
+                          <CDBSidebarMenuItem icon="sign-out-alt">Logout</CDBSidebarMenuItem>
+                      </NavLink>
+                  </CDBSidebarMenu>
+              </CDBSidebarContent>
+
+       {/* <CDBSidebarFooter style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              padding: '20px 5px',
+            }}
+          >
+            Sidebar Footer
+          </div>
+        </CDBSidebarFooter>*/}
+      </CDBSidebar>
+    </div>
+  );
+};
+
+>>>>>>> 2ec04d9fe5d2731343f4b25f9833d3ab68d77411
 export default Sidebar;
