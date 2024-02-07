@@ -17,7 +17,7 @@ export const TAssignmentCard = () => {
     },
     rotation: -90,
     circumference: 180,
-    cutout: "60%",
+    cutout: "80%",
     maintainAspectRatio: true,
     responsive: true,
   }
@@ -30,7 +30,7 @@ export const TAssignmentCard = () => {
           "#99CCFF"
         ],
         display: true,
-        borderColor: "#D1D6DC"
+        borderColor: "white"
       }
     ]
   };

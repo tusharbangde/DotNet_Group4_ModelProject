@@ -4,7 +4,7 @@ import bgd from "../resources/home-page-image.png";
 import "../styles/login.css";
 import Container from 'react-bootstrap/Container';
 import { Col, Form, Image, Row } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 export const Signup = () => {
 
@@ -16,6 +16,7 @@ export const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const [errors, setErrors] = useState([]);
+    const navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -53,9 +54,10 @@ export const Signup = () => {
                 Email: email,
                 PhoneNumber: mobile
             };
-            const url = 'https://localhost:44319/registration';
+            const url = 'https://localhost:7182/api/Register/register';
             axios.post(url, data).then((result) => {
-                alert(result.data);
+                alert("Registered Successfully");
+                navigate('/unauthorized/login');
             }).catch((error) => {
                 alert(error);
             })

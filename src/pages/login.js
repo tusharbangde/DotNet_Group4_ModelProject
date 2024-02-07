@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import home from "../resources/home 1.png";
 import bgd from "../resources/home-page-image.png";
 import "../styles/login.css";
@@ -13,22 +13,34 @@ export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [errors, setErrors] = useState([]);
+    const [userTypeErr, setUserTypeErr] = useState("");
+    const [emailErr, setEmailErr] = useState("");
+    const [passErr, setPassErr] = useState("");
+    const [loggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();
+
     const onSubmit = (e) => {
         e.preventDefault();
-        const ers = [];
+        let ers = 0
         if(userType==="") {
-            ers.push("Please select a user Type (Teacher or Student)");
+            ers+=1
+            setUserTypeErr("Please select a user Type (Teacher or Student)");
+        } else {
+            setUserTypeErr("")
         }
         if(!isValidEmail(email)) {
-            ers.push("Please enter a valid email address");
+            ers+=1
+            setEmailErr("Please enter a valid email address");
+        } else {
+            setEmailErr("")
         }
         if(password==="") {
-            ers.push("Please enter your password");
+            ers+=1
+            setPassErr("Please enter your password");
+        } else {
+            setPassErr("")
         }
-        setErrors(ers);
-        if(ers.length===0) {
+        if(ers===0) {
             console.log(userType);
             console.log(email);
             console.log(password);
@@ -37,14 +49,20 @@ export const Login = () => {
                 Password: password,
                 userType: userType,
             };
-            const url = 'https://localhost:44319/login';
+            const url = 'https://localhost:7182/api/Login/login';
             axios.post(url, data).then((result) => {
-                if (result.data === "Data Found" && userType ==="Teacher") {
-                    navigate("/teacher-dashboard");
+                console.log(result.status);
+                if (result.status == 200) {
+                    localStorage.setItem('email', JSON.stringify(email));
+                    localStorage.setItem('userType', JSON.stringify(userType));
+                    localStorage.setItem('token', JSON.stringify(result.data.token));
+                    localStorage.setItem('userId', JSON.stringify(result.data.userId));
+                    // navigate('/');
+                    window.location.reload(true)
                 }
                 else alert(result.data);
             }).catch((error) => {
-                alert(error);
+                alert("Credentials do not match");
             })
         }
     }
@@ -84,8 +102,8 @@ export const Login = () => {
                                             type="radio" 
                                             id={`teacher`} 
                                             label={`TEACHER`} 
-                                            onChange={()=>setUserType("Teacher")}
-                                            checked={userType==="Teacher"}
+                                            onChange={()=>setUserType("T")}
+                                            checked={userType==="T"}
                                         />
                                     </Col>
                                     <Col>
@@ -94,9 +112,14 @@ export const Login = () => {
                                             type="radio" 
                                             id={`student`} 
                                             label={`STUDENT`} 
-                                            onChange={()=>setUserType("Student")}
-                                            checked={userType==="Student"}
+                                            onChange={()=>setUserType("S")}
+                                            checked={userType==="S"}
                                         />
+                                    </Col>
+                                </Row>
+                                <Row className="text-danger">
+                                    <Col>
+                                        {userTypeErr}
                                     </Col>
                                 </Row>
                                 <Row className="email-input">
@@ -109,6 +132,11 @@ export const Login = () => {
                                          />
                                     </Col>
                                 </Row>
+                                <Row className="text-danger">
+                                    <Col>
+                                        {emailErr}
+                                    </Col>
+                                </Row>
                                 <Row className="password-input">
                                     <Col>
                                         <Form.Control 
@@ -117,6 +145,11 @@ export const Login = () => {
                                         value={password}
                                         onChange={(e)=>setPassword(e.target.value)}
                                         />
+                                    </Col>
+                                </Row>
+                                <Row className="text-danger">
+                                    <Col>
+                                        {passErr}
                                     </Col>
                                 </Row>
                                 <Row>
@@ -128,22 +161,17 @@ export const Login = () => {
                                          />
                                     </Col>
                                 </Row>
-                                <Row className="text-danger">
-                                    <Col>
-                                        {errors.map(e=><div key={e}>{e}</div>)}
-                                    </Col>
-                                </Row>
                                 <Row>
                                     <Col>
                                         <span>Don't have an account ?</span>
-                                        <NavLink style={{textDecoration:"none"}} to="/signup">
+                                        <NavLink style={{textDecoration:"none"}} to="/unauthorized/signup">
                                             <span className="get-started"> Get Started</span>
                                         </NavLink>
                                     </Col>
                                 </Row>
                             </Form>
                     </div>
-                    <Container className="footer">
+                    {/* <Container className="footer">
                         <Row>
                             <Col xs={8}>
                                 Copyright © 2023 HomeWork All rights reserved.
@@ -154,7 +182,7 @@ export const Login = () => {
                                 </div>
                             </Col>
                         </Row>
-                    </Container>
+                    </Container> */}
                 </Col>
         </Container>
         <div><Image className="background-img" src={bgd}></Image></div>
