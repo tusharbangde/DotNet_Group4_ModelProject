@@ -1,12 +1,11 @@
-<<<<<<< HEAD
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "../styles/login.css";
 import { Button, Card, CardBody } from "react-bootstrap";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
 
 Chart.register(ArcElement);
-export const TAssignmentCard = () => {
+export const TAssignmentCard = ({ assignment }) => {
   const options = {
     plugins: {
       legend: {
@@ -21,125 +20,68 @@ export const TAssignmentCard = () => {
     cutout: "80%",
     maintainAspectRatio: true,
     responsive: true,
-  }
-  const data = {
+  };
+  const [data, setData] = useState({
     datasets: [
       {
-        data: [3, 10],
-        backgroundColor: [
-          "#336699",
-          "#99CCFF"
-        ],
+        // data: [assignment.noOfStudentsSubmitted, assignment.totNoOfStudents],
+        data: [50, 50],
+        backgroundColor: ["#336699", "#99CCFF"],
         display: true,
-        borderColor: "white"
-      }
-    ]
-  };
-  return (
-    <Card style={{width:"fit-content"}}>
-      <CardBody>
-        <div>
-            <div style={{ marginBottom:"-1.5rem", marginTop:"-2.5rem"}}>
-                <Doughnut
-                    data={data}
-                    options={options}
-                    style={{height:"100%", width:"100%"}}
-                />
-            </div>
-            <div style={{marginBottom:"0.5rem"}}>
-                <Button variant="success" size="sm">
-                    Auto
-                </Button>
-            </div>
-            <div>
-                <span>Class: </span>
-                <span>8th</span>
-            </div>
-            <div>
-                <span>Subject: </span>
-                <span>Maths</span>
-            </div>
-            <div>
-                <span>Comments</span>
-            </div>
-            <div>
-                <span>Details</span>
-            </div>
-        </div>
-      </CardBody>
-    </Card>
-  );
-};
-=======
-import React, { Fragment, useState } from "react";
-import "../styles/login.css";
-import { Button, Card, CardBody } from "react-bootstrap";
-import { Doughnut } from "react-chartjs-2";
-import { Chart, ArcElement } from "chart.js";
+        borderColor: "white",
+      },
+    ],
+  });
 
-Chart.register(ArcElement);
-export const TAssignmentCard = () => {
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    rotation: -90,
-    circumference: 180,
-    cutout: "60%",
-    maintainAspectRatio: true,
-    responsive: true,
-  }
-  const data = {
-    datasets: [
-      {
-        data: [3, 10],
-        backgroundColor: [
-          "#336699",
-          "#99CCFF"
-        ],
-        display: true,
-        borderColor: "#D1D6DC"
-      }
-    ]
-  };
+  useEffect(() => {
+    const temp = {
+      datasets: [
+        {
+          data: [assignment.noOfStudentsSubmitted, assignment.totNoOfStudents],
+          backgroundColor: ["#336699", "#99CCFF"],
+          display: true,
+          borderColor: "white",
+        },
+      ],
+    };
+    setData(temp);
+  }, []);
   return (
-    <Card style={{width:"fit-content"}}>
-      <CardBody>
+    <Card style={{width:"100%"}}>
+      <CardBody style={{width:"100%"}}>
         <div>
-            <div style={{ marginBottom:"-1.5rem", marginTop:"-2.5rem"}}>
-                <Doughnut
-                    data={data}
-                    options={options}
-                    style={{height:"100%", width:"100%"}}
-                />
-            </div>
-            <div style={{marginBottom:"0.5rem"}}>
-                <Button variant="success" size="sm">
-                    Auto
-                </Button>
-            </div>
-            <div>
-                <span>Class: </span>
-                <span>8th</span>
-            </div>
-            <div>
-                <span>Subject: </span>
-                <span>Maths</span>
-            </div>
-            <div>
-                <span>Comments</span>
-            </div>
-            <div>
-                <span>Details</span>
-            </div>
+          <div style={{ marginBottom: "-1.5rem", marginTop: "-2.5rem" }}>
+            <Doughnut
+              data={data}
+              options={options}
+              // style={{ height: "100%", width: "100%" }}
+            />
+          </div>
+          <div style={{ marginBottom: "0.5rem" }}>
+            {assignment.autoAssign=='1' ? (
+              <Button variant="success" size="sm">
+                Auto Approve Enabled
+              </Button>
+            ) : (
+              <Button variant="danger" size="sm">
+                Auto Approve Disabled
+              </Button>
+            )}
+          </div>
+          <div>
+            <span>Subject: </span>
+            <span>{assignment.subjectName}</span>
+          </div>
+          <div>
+            <span>Topic: </span>
+            <span>{assignment.topicName}</span>
+          </div>
+          <div>
+            <span>Task: </span>
+            <span>{assignment.task}</span>
+          </div>
         </div>
       </CardBody>
     </Card>
   );
 };
->>>>>>> 2ec04d9fe5d2731343f4b25f9833d3ab68d77411

@@ -1,27 +1,73 @@
 import React, { useEffect, useState } from "react";
 import "../styles/login.css";
 import Sidebar from "./sidebar_teacher";
-import { Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
 import "../styles/TAssignmentPage.css";
 import { Doughnut } from "react-chartjs-2";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export const TAssignmentPage = () => {
-
   const [list, setList] = useState([]);
+  const { id } = useParams();
+  const statuses = {
+    0: "Pending",
+    1: "Submitted",
+    2: "Approved",
+    3: "Rejected",
+  };
 
-  useEffect(()=>{
-    let temp = [
-        {student_id:"1", student_name:"Somya Patel", date:"2/2/2024", status:"Approved"},
-        {student_id:"2", student_name:"Tushar", date:"1/2/2024", status:"Pending"},
-        {student_id:"3", student_name:"Vedant", date:"31/1/2024", status:"Approved"},
-        {student_id:"4", student_name:"Diwakar", date:"29/2/2024", status:"Rejected"},
-        {student_id:"5", student_name:"Sarvesh", date:"2/2/2024", status:"Rejected"},
-        {student_id:"6", student_name:"Diksha Shaw", date:"2/2/2024", status:"Pending"},
-        {student_id:"7", student_name:"Shovin", date:"2/2/2024", status:"Pending"},
-        {student_id:"8", student_name:"Ankit", date:"2/2/2024", status:"Rejected"},
-    ]
-    setList(temp)
-  }, [])
+  const downloadHomework = (hid) => {
+    const url = "https://localhost:7182/api/Homework/download-homework";
+    axios
+      .get(url, { params: { hid: hid }, responseType: "arraybuffer" })
+      .then((result) => {
+        if (result.data != null) {
+          const blob = new Blob([result.data], { type: "application/pdf" });
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = "homework.pdf";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const approveSubmission = (homeworkID) => {};
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    const url = "https://localhost:7182/api/Assignment/Get-Assignment";
+    axios
+      .get(url, { params: { id: id } })
+      .then((result) => {
+        console.log(result.data);
+        setList(result.data);
+        const temp = {
+          datasets: [
+            {
+              data: [
+                result.data.filter((r) => r.status != 0).length,
+                result.data.length,
+              ],
+              backgroundColor: ["#336699", "#99CCFF"],
+              display: true,
+            },
+          ],
+        };
+        setData(temp);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const options = {
     plugins: {
@@ -38,7 +84,7 @@ export const TAssignmentPage = () => {
     maintainAspectRatio: true,
     responsive: true,
   };
-  const data = {
+  const [data, setData] = useState({
     datasets: [
       {
         data: [3, 10],
@@ -46,7 +92,24 @@ export const TAssignmentPage = () => {
         display: true,
       },
     ],
-  };
+  });
+
+  const changeStatus = (sid, status) => {
+    const url = "https://localhost:7182/api/Homework/ChangeStatus";
+    axios
+      .post(url, null, { params: { aid: id, sid, status } })
+      .then((result) => {
+        if(result.status==200){
+          alert("Homework status updated successfully");
+          getData();
+        }
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <div className="d-flex">
       <Sidebar />
@@ -65,7 +128,7 @@ export const TAssignmentPage = () => {
               marginTop: "1.5rem",
             }}
           >
-            <h3 style={{ marginTop: "1rem" }}>Assignment Name</h3>
+            <h3 style={{ marginTop: "1rem" }}>{list[0]?.subject}</h3>
           </div>
 
           <Row
@@ -73,16 +136,17 @@ export const TAssignmentPage = () => {
           >
             <Col>
               <div className="h4">
-                Subject Name: <span>subject</span>
+                Subject Name: <span>{list[0]?.subject}</span>
               </div>
               <div className="h4">
-                Topic Name: <span>topic</span>
+                Topic Name: <span>{list[0]?.topic}</span>
               </div>
               <div className="h4">
-                Auto Approve: <span>yes</span>
+                Auto Approve:{" "}
+                <span>{list[0]?.assign == "1" ? "Yes" : "No"}</span>
               </div>
               <div className="h4">
-                Number of students: <span>30</span>
+                Number of students: <span>{list.length}</span>
               </div>
             </Col>
             <Col>
@@ -91,11 +155,11 @@ export const TAssignmentPage = () => {
                   display: "flex",
                   justifyContent: "end",
                   marginBottom: "-1.5rem",
-                  marginTop: "-4.9rem"
+                  marginTop: "-4.9rem",
                 }}
               >
-                <div style={{width:"17rem", height:"17rem"}}>
-                <Doughnut data={data} options={options}/>
+                <div style={{ width: "17rem", height: "17rem" }}>
+                  <Doughnut data={data} options={options} />
                 </div>
               </div>
             </Col>
@@ -108,21 +172,53 @@ export const TAssignmentPage = () => {
                 <tr>
                   <th>Id</th>
                   <th>Student</th>
-                  <th>Date</th>
                   <th>Status</th>
                   <th>Submission</th>
-                  <th>Approve</th>
+                  {list[0]?.assign == "0" ? <th>Approve</th> : ""}
                 </tr>
               </thead>
               <tbody>
-                {list.map((el)=><tr>
-                  <td>{el.student_id}</td>
-                  <td>{el.student_name}</td>
-                  <td>{el.date}</td>
-                  <td>{el.status}</td>
-                  <td></td>
-                  <td></td>
-                </tr>)}
+                {list.map((el) => (
+                  <tr>
+                    <td>{el.studentId}</td>
+                    <td>{el.studentName}</td>
+                    <td>{statuses[el.status]}</td>
+                    <td>
+                      <Button
+                        disabled={el.status == "0"}
+                        className="btn btn-info"
+                        onClick={() => downloadHomework(el.homeworkID)}
+                      >
+                        Download
+                      </Button>
+                    </td>
+                    {list[0]?.assign == "0" ? (
+                      <td>
+                        <Button
+                          onClick={() => {
+                            changeStatus(el.studentId, 2);
+                          }}
+                          className="btn btn-success"
+                          style={{ marginRight: "1rem" }}
+                          disabled={el.status == "2" || el.status == "0"}
+                        >
+                          Approve
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            changeStatus(el.studentId, 3);
+                          }}
+                          className="btn btn-danger"
+                          disabled={el.status != '1'}
+                        >
+                          Reject
+                        </Button>
+                      </td>
+                    ) : (
+                      ""
+                    )}
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </Row>
