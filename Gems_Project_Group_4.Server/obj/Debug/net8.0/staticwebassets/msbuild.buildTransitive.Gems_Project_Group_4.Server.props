@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Gems_Project_Group_4.Server.props" />
+</Project>

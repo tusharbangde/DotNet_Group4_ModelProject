@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:5173",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\aditi_chourasia\\Downloads\\Gems_Project_Group_4\\Gems_Project_Group_4\\Gems_Project_Group_4.Server\\..\\gems_project_group_4.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}
