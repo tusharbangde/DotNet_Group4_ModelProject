@@ -322,7 +322,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.SpaProxy/8.0.1": {
+      "Microsoft.AspNetCore.SpaProxy/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll": {}
@@ -2363,10 +2363,10 @@
         "microsoft.aspnetcore.routing.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.SpaProxy/8.0.1": {
-      "sha512": "Cr90fgPoG1Esw/pKTD/sdIHkjPcnbVoaoSrblSPsaPk6vCzpHtiS254gNfeNkiV2rm4Igu2S2XseNidXBemL/A==",
+    "Microsoft.AspNetCore.SpaProxy/8.0.2": {
+      "sha512": "AJO5WO1A7WsyxxjVbcHlvAu3dCJOchP7zgjmcLTJum3wqIgCxVWUL+X+bB24eat91jtPXAJRdH1imwZg/1BeQw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/8.0.1",
+      "path": "microsoft.aspnetcore.spaproxy/8.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2374,7 +2374,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.SpaProxy.targets",
         "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.8.0.1.nupkg.sha512",
+        "microsoft.aspnetcore.spaproxy.8.0.2.nupkg.sha512",
         "microsoft.aspnetcore.spaproxy.nuspec"
       ]
     },
@@ -5542,24 +5542,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aditi_chourasia\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\tushar_bangde\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aditi_chourasia\\Downloads\\Gems_Project_Group_4\\Gems_Project_Group_4\\Gems_Project_Group_4.Server\\Gems_Project_Group_4.Server.csproj",
+      "projectUniqueName": "C:\\Users\\tushar_bangde\\source\\repos\\Action_Project_BackEnd\\Gems_Project_Group_4.Server\\Gems_Project_Group_4.Server.csproj",
       "projectName": "Gems_Project_Group_4.Server",
-      "projectPath": "C:\\Users\\aditi_chourasia\\Downloads\\Gems_Project_Group_4\\Gems_Project_Group_4\\Gems_Project_Group_4.Server\\Gems_Project_Group_4.Server.csproj",
-      "packagesPath": "C:\\Users\\aditi_chourasia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aditi_chourasia\\Downloads\\Gems_Project_Group_4\\Gems_Project_Group_4\\Gems_Project_Group_4.Server\\obj\\",
+      "projectPath": "C:\\Users\\tushar_bangde\\source\\repos\\Action_Project_BackEnd\\Gems_Project_Group_4.Server\\Gems_Project_Group_4.Server.csproj",
+      "packagesPath": "C:\\Users\\tushar_bangde\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tushar_bangde\\source\\repos\\Action_Project_BackEnd\\Gems_Project_Group_4.Server\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\aditi_chourasia\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\tushar_bangde\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5567,7 +5562,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
